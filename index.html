@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Практична робота — Гіперпосилання та кнопки</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <style>
+       
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f4f7f6;
+            color: #333;
+        }
+
+        header, section, footer {
+            background: white;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+   
+        .my-custom-btn {
+            display: inline-block;
+            background-color: #28a745;
+            color: white;
+            padding: 12px 24px;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 5px;
+            border: 2px solid #1e7e34;
+            transition: background-color 0.3s, transform 0.2s;
+            cursor: pointer;
+        }
+
+        .my-custom-btn:hover {
+            background-color: #218838;
+            color: white;
+            transform: scale(1.05);
+        }
+
+        .generated-btn {
+            box-shadow: inset 0px 1px 0px 0px #97c4fe;
+            background: linear-gradient(to bottom, #3d94f6 5%, #1e62d0 100%);
+            background-color: #3d94f6;
+            border-radius: 6px;
+            border: 1px solid #337fed;
+            display: inline-block;
+            cursor: pointer;
+            color: #ffffff;
+            font-family: Arial;
+            font-size: 15px;
+            font-weight: bold;
+            padding: 10px 24px;
+            text-decoration: none;
+            text-shadow: 0px 1px 0px #1570cd;
+        }
+        .generated-btn:hover {
+            background: linear-gradient(to bottom, #1e62d0 5%, #3d94f6 100%);
+            background-color: #1e62d0;
+            color: #ffffff;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .js-box {
+            background-color: #e9ecef;
+            padding: 15px;
+            border-left: 4px solid #0d6efd;
+            margin-top: 15px;
+        }
+    </style>
+</head>
+<body>
+
+    
+    <header id="top">
+        <h1>Основи веб-розробки: Навігація та кнопки</h1>
+        <p><strong>Виконав:</strong> студент групи ІПЗ-24-1</p>
+        
+        <hr>
+        <h3>Навігація по поточному документу (Якірні посилання):</h3>
+        <div class="nav-menu">
+         
+            <a href="#section1" class="my-custom-btn">Розділ 1: Вступ</a>
+            <a href="#section2" class="generated-btn">Розділ 2: Історія HTML</a>
+            <a href="#section3" class="btn btn-warning">Розділ 3: Попередні роботи</a>
+            <a href="#js-section" class="btn btn-info">До JavaScript функції</a>
+        </div>
+    </header>
+
+    
+    <section id="section1">
+        <h2>Розділ 1. Вступ до гіпертексту</h2>
+        <p>Гіпертекст — це текст, який містить посилання на інші тексти або фрагменти всередині самого себе. Саме завдяки гіперпосиланням звичайні текстові документи перетворилися на Всесвітню павутину (World Wide Web), якою ми користуємося щодня. Основним тегом для створення посилань у мові HTML є тег <code><a></code> з обов'язковим атрибутом <code>href</code>.</p>
+        <p>Коли документ має великий обсяг тексту, користувачеві незручно постійно крутити коліщатко миші вгору та вниз. Для вирішення цієї проблеми використовують так звані «якірні» посилання. Вони дозволяють миттєво перестрибнути до потрібного абзацу або заголовка. Для цього елементу, на який ми хочемо перейти, задається унікальний атрибут <code>id</code>, а в посиланні вказується його назва зі знаком решітки <code>#</code> попереду.</p>
+        <p>Крім звичайного підкресленого синього тексту, сучасні сайти оформлюють посилання у вигляді кнопок. Це робить інтерфейс більш інтуїтивним та зручним для натискання як мишкою на комп'ютері, так і пальцем на екрані смартфона. Створити таку кнопку можна власноруч за допомогою CSS, згенерувати на спеціальних онлайн-сервісах або взяти готову з CSS-фреймворків.</p>
+        
+        <a href="#top">↑ Повернутися на початок сторінки</a>
+    </section>
+
+    
+    <section id="section2">
+        <h2>Розділ 2. Коротка історія розвитку HTML та CSS</h2>
+        <p>Мова розмітки гіпертексту HTML була створена британським вченим Тімом Бернерсом-Лі на початку 1990-х років у стінах Європейської організації з ядерних досліджень (CERN). Спочатку вона налічувала менше двадцяти тегів і призначалася виключно для обміну науковою документацією між фізиками з різних університетів світу.</p>
+        <p>Перші веб-сторінки виглядали дуже просто: білий або сірий фон, чорний текст шрифтом Times New Roman і сині підкреслені посилання. Жодних анімацій, градієнтів чи красивих кнопок тоді не існувало. Усі спроби прикрасити сторінку робилися прямо в HTML за допомогою тегів на кшталт <code><font></code> або таблиць, що робило код громіздким і важким для підтримки.</p>
+        <p>Ситуація кардинально змінилася з появою каскадних таблиць стилів — CSS (Cascading Style Sheets). Це дозволило відокремити структуру документа (HTML) від його зовнішнього вигляду (CSS). Тепер розробники отримали повний контроль над кольорами, відступами, тінями, заокругленням кутів та поведінкою елементів при наведенні курсора (псевдоклас <code>:hover</code>). Сьогодні стандарт HTML5 у поєднанні з CSS3 дозволяє створювати повноцінні веб-додатки, які нічим не поступаються звичайним програмам на ПК.</p>
+        <p>Для прискорення роботи програмісти часто використовують генератори коду (наприклад, CSS Button Generator) або підключають готові бібліотеки стилів, такі як Bootstrap чи Tailwind CSS, де вже прописані класи для десятків варіантів кнопок, форм та меню.</p>
+
+        <a href="#top">↑ Повернутися на початок сторінки</a>
+    </section>
+
+   
+    <section id="section3">
+        <h2>Розділ 3. Кнопки-посилання на наші попередні роботи</h2>
+        <p>Нижче наведено перехід до раніше виконаних практичних робіт (посилання на інші локальні HTML-документи):</p>
+        
+        <ul>
+            <li style="margin-bottom: 15px;">
+                <strong>1. Саморобна кнопка :</strong><br>
+                <a href="lab1.html" target="_blank" class="my-custom-btn">Відкрити Лабораторну роботу №1 (Форматування тексту)</a>
+            </li>
+            
+            <li style="margin-bottom: 15px;">
+                <strong>2. Кнопка з онлайн-генератора кнопок :</strong><br>
+                <a href="lab2.html" target="_blank" class="generated-btn">Відкрити Лабораторну роботу №2 (Списки та таблиці)</a>
+            </li>
+            
+            <li style="margin-bottom: 15px;">
+                <strong>3. Готова кнопка з бібліотеки :</strong><br>
+                <a href="lab3.html" target="_blank" class="btn btn-primary btn-lg">Відкрити Лабораторну роботу №3 (Робота з графікою)</a>
+            </li>
+        </ul>
+
+        <a href="#top">↑ Повернутися на початок сторінки</a>
+    </section>
+
+   
+    <section id="js-section">
+        <h2>Розділ 4. Інтерактивна кнопка на JavaScript</h2>
+        <p>Натисніть на кнопку нижче, щоб запустити простий скрипт, який перевіряє поточний час, рахує кількість натискань і змінює текст на сторінці:</p>
+
+        
+        <button onclick="studentFunction()" class="btn btn-danger btn-lg">Запустити JS-функцію!</button>
+
+        <div class="js-box" id="result-area">
+            Тут з'явиться результат роботи JavaScript...
+        </div>
+
+        <br>
+        <a href="#top">↑ Повернутися на початок сторінки</a>
+    </section>
+
+    <footer style="text-align: center; color: #666;">
+        <p>
+    </footer>
+
+    <script>
+        
+        let clickCount = 0;
+
+        function studentFunction() {
+        
+            clickCount++;
+
+            
+            let now = new Date();
+            let currentTime = now.toLocaleTimeString();
+
+           
+            alert("Привіт! Функція спрацювала! Це натискання №" + clickCount);
+
+           
+            let outputBox = document.getElementById("result-area");
+            outputBox.innerHTML = "<strong>Успіх!</strong> Ви натиснули на кнопку <b>" + clickCount + "</b> раз(ів).<br>" +
+                                  "Час запуску скрипта: <b>" + currentTime + "</b>.<br>" +
+                                  "Студент групи ІПЗ-24-1 успішно виконав завдання!";
+            
+            
+            outputBox.style.borderLeftColor = "#28a745";
+            outputBox.style.backgroundColor = "#d4edda";
+        }
+    </script>
+
+</body>
+</html>
