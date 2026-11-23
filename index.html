@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Практична робота — HTML-форми та обробка даних у JS</title>
+    <title>Практична робота — Анімація: marquee та CSS animation</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -27,236 +27,171 @@
             color: #2c3e50;
         }
 
-        fieldset {
-            border: 1px solid #ccc;
+        
+        .marquee-box {
+            background-color: #fff3cd;
+            border: 1px solid #ffe69c;
             border-radius: 6px;
-            padding: 15px;
+            padding: 10px;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+
+        
+        .stage {
+            position: relative;
+            height: 110px;
+            background-color: #e9ecef;
+            border: 2px dashed #adb5bd;
+            border-radius: 6px;
+            overflow: hidden;
             margin-bottom: 15px;
         }
 
-        legend {
+        
+        .moving-block {
+            width: 150px;
+            height: 50px;
+            line-height: 50px;
+            text-align: center;
+            color: white;
             font-weight: bold;
-            color: #0d6efd;
-            padding: 0 8px;
+            background-color: #0d6efd;
+            border-radius: 6px;
+            position: absolute;
+            top: 30px;
+            left: 0;
+            animation: slideAndColor 4s linear infinite alternate;
         }
 
-        .form-group {
-            margin-bottom: 12px;
+        @keyframes slideAndColor {
+            0% {
+                left: 0;
+                background-color: #0d6efd;
+                transform: scale(1);
+            }
+            50% {
+                background-color: #6610f2;
+                transform: scale(1.08);
+            }
+            100% {
+                left: calc(100% - 150px);
+                background-color: #198754;
+                transform: scale(1);
+            }
         }
 
-        label {
+        /* 2. Анімація пульсації / обертання індикатора */
+        .badge-box {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin-top: 15px;
+        }
+
+        .pulse-badge {
             display: inline-block;
-            margin-bottom: 4px;
+            padding: 10px 18px;
+            background-color: #dc3545;
+            color: white;
             font-weight: bold;
+            border-radius: 20px;
+            animation: pulseEffect 1.5s ease-in-out infinite;
         }
 
-        input[type="text"],
-        input[type="password"],
-        input[type="email"],
-        input[type="number"],
-        input[type="date"],
-        select,
-        textarea {
-            width: 100%;
-            max-width: 400px;
-            padding: 8px;
-            border: 1px solid #bbb;
-            border-radius: 4px;
-            box-sizing: border-box;
+        @keyframes pulseEffect {
+            0% {
+                transform: scale(1);
+                box-shadow: 0 0 0 0 rgba(220, 53, 69, 0.7);
+            }
+            70% {
+                transform: scale(1.05);
+                box-shadow: 0 0 0 12px rgba(220, 53, 69, 0);
+            }
+            100% {
+                transform: scale(1);
+                box-shadow: 0 0 0 0 rgba(220, 53, 69, 0);
+            }
+        }
+
+        /* Клас для постановки CSS-анімації на паузу */
+        .paused {
+            animation-play-state: paused !important;
         }
 
         .btn {
             background-color: #0d6efd;
             color: white;
-            padding: 10px 18px;
+            padding: 8px 16px;
             border: none;
             border-radius: 5px;
             cursor: pointer;
-            font-size: 15px;
+            font-size: 14px;
             font-weight: bold;
-            margin-right: 10px;
+            margin-right: 8px;
         }
 
         .btn:hover {
             background-color: #0b5ed7;
         }
 
-        .btn-reset {
-            background-color: #6c757d;
+        .btn-warning {
+            background-color: #ffc107;
+            color: #212529;
         }
 
-        .btn-reset:hover {
-            background-color: #5a6268;
-        }
-
-        .btn-js {
-            background-color: #198754;
-        }
-
-        .btn-js:hover {
-            background-color: #157347;
-        }
-
-        .result-box {
-            background-color: #e9ecef;
-            border-left: 4px solid #198754;
-            padding: 12px 15px;
-            margin-top: 15px;
-            border-radius: 4px;
-            font-size: 16px;
+        .btn-warning:hover {
+            background-color: #e0a800;
         }
     </style>
 </head>
 <body>
 
     <header>
-        <h1>Практична робота: Створення HTML-форм та передача даних у JS</h1>
+        <h1>Практична робота: Анімація на сторінці</h1>
         <p><strong>Виконав:</strong> студент групи ІПЗ-24-1</p>
-        <p><a href="index.html">← Повернутися до попередньої роботи (Посилання та кнопки)</a></p>
+        <p>
+            <a href="index.html">← Посилання та кнопки</a> |
+            <a href="forms.html">← HTML-форми та JS</a>
+        </p>
     </header>
 
-
+    
     <section>
-        <h2>1. Форма реєстрації студента (текстові поля та списки)</h2>
-        <form action="#" method="post" onsubmit="alert('Дані форми відправлено!'); return false;">
-            <fieldset>
-                <legend>Особисті дані</legend>
-                
-                <div class="form-group">
-                    <label for="username">Прізвище та ім'я:</label><br>
-                    <input type="text" id="username" name="username" placeholder="Введіть ПІБ" required>
-                </div>
+        <h2>1. Анімація за допомогою тегу <marquee></h2>
+        <p>Тег <code><marquee></code> створює бігучий рядок або рухомий елемент без написання CSS-анімацій. Наведіть курсор на рядок, щоб він зупинився (за рахунок подій <code>onmouseover</code> та <code>onmouseout</code>).</p>
 
-                <div class="form-group">
-                    <label for="useremail">Електронна пошта:</label><br>
-                    <input type="email" id="useremail" name="useremail" placeholder="student@ukraine.edu.ua" required>
-                </div>
+        <div class="marquee-box">
+            <marquee behavior="scroll" direction="left" scrollamount="6" onmouseover="this.stop();" onmouseout="this.start();">
+                Увага! Практична робота з веб-розробки — студент групи ІПЗ-24-1 вивчає анімацію в HTML та CSS!
+            </marquee>
+        </div>
 
-                <div class="form-group">
-                    <label for="userpass">Пароль:</label><br>
-                    <input type="password" id="userpass" name="userpass" placeholder="Мінімум 6 символів" minlength="6" required>
-                </div>
+        <div class="marquee-box" style="background-color: #e7f1ff; border-color: #b6d4fe;">
+            <marquee behavior="alternate" direction="right" scrollamount="4">
+                Рух туди-сюди (behavior="alternate")
+            </marquee>
+        </div>
 
-                <div class="form-group">
-                    <label for="birthdate">Дата народження:</label><br>
-                    <input type="date" id="birthdate" name="birthdate">
-                </div>
-
-                <div class="form-group">
-                    <label for="group">Оберіть групу:</label><br>
-                    <select id="group" name="group">
-                        <option value="ipz-24-1" selected>ІПЗ-24-1</option>
-                        <option value="ipz-24-2">ІПЗ-24-2</option>
-                        <option value="kn-24-1">КН-24-1</option>
-                    </select>
-                </div>
-            </fieldset>
-
-            <button type="submit" class="btn">Зареєструватися</button>
-            <button type="reset" class="btn btn-reset">Очистити форму</button>
-        </form>
+        <p><small><strong>Примітка:</strong> у сучасному стандарті HTML5 тег <code><marquee></code> вважається застарілим (deprecated), тому в реальних проєктах замість нього використовують CSS або JavaScript.</small></p>
     </section>
 
-
+    
     <section>
-        <h2>2. Форма опитування (перемикачі, прапорці, повзунки)</h2>
-        <form action="#" method="get" onsubmit="alert('Дякуємо за участь в опитуванні!'); return false;">
-            <fieldset>
-                <legend>Ваші вподобання у програмуванні</legend>
+        <h2>2. Анімація за допомогою властивості CSS animation</h2>
+        <p>Властивість <code>animation</code> разом із правилом <code>@keyframes</code> дозволяє плавно змінювати координати, колір, масштаб і тіні елементів.</p>
 
-                <div class="form-group">
-                    <p><strong>Оберіть основний напрямок (radio — тільки один варіант):</strong></p>
-                    <input type="radio" id="frontend" name="direction" value="frontend" checked>
-                    <label for="frontend" style="font-weight: normal;">Frontend (HTML, CSS, JS)</label><br>
-                    
-                    <input type="radio" id="backend" name="direction" value="backend">
-                    <label for="backend" style="font-weight: normal;">Backend (Python, C#, Node.js)</label><br>
-                    
-                    <input type="radio" id="gamedev" name="direction" value="gamedev">
-                    <label for="gamedev" style="font-weight: normal;">GameDev (Unity, Unreal Engine)</label>
-                </div>
+        <div class="stage">
+            <div class="moving-block" id="animatedBlock">ІПЗ-24-1</div>
+        </div>
 
-                <div class="form-group">
-                    <p><strong>Які мови ви вже вивчали (checkbox — кілька варіантів):</strong></p>
-                    <input type="checkbox" id="lang_py" name="langs" value="Python" checked>
-                    <label for="lang_py" style="font-weight: normal;">Python</label><br>
+        <button type="button" class="btn btn-warning" onclick="toggleAnimation()">Пауза / Продовжити рух</button>
+        <button type="button" class="btn" onclick="changeSpeed()">Змінити швидкість</button>
 
-                    <input type="checkbox" id="lang_js" name="langs" value="JavaScript" checked>
-                    <label for="lang_js" style="font-weight: normal;">JavaScript</label><br>
-
-                    <input type="checkbox" id="lang_cpp" name="langs" value="C++">
-                    <label for="lang_cpp" style="font-weight: normal;">C / C++</label>
-                </div>
-
-                <div class="form-group">
-                    <label for="skill_level">Оцініть свій рівень знань (від 1 до 10):</label><br>
-                    <input type="range" id="skill_level" name="skill_level" min="1" max="10" value="5" oninput="this.nextElementSibling.value = this.value">
-                    <output>5</output>
-                </div>
-
-                <div class="form-group">
-                    <label for="fav_color">Улюблений колір теми редактора коду:</label>
-                    <input type="color" id="fav_color" name="fav_color" value="#1e1e1e">
-                </div>
-
-                <div class="form-group">
-                    <label for="avatar">Завантажити скріншот коду (file):</label><br>
-                    <input type="file" id="avatar" name="avatar">
-                </div>
-
-                <div class="form-group">
-                    <label for="comments">Додатковий коментар (textarea):</label><br>
-                    <textarea id="comments" name="comments" rows="3" placeholder="Напишіть ваші враження від лекції..."></textarea>
-                </div>
-            </fieldset>
-
-            <button type="submit" class="btn">Надіслати відповіді</button>
-        </form>
-    </section>
-
-    <section>
-        <h2>3. Внесення даних у форму для роботи функцій JavaScript</h2>
-        <p>Реалізація задач з курсу <em>«Основи програмування на JavaScript»</em> із введенням даних через HTML-форму замість застарілого <code>prompt()</code>.</p>
-        <fieldset>
-            <legend>Задача 1: Площа та гіпотенуза прямокутного трикутника</legend>
-            <form onsubmit="return false;">
-                <div class="form-group">
-                    <label for="cathetusA">Введіть катет A (см):</label><br>
-                    <input type="number" id="cathetusA" placeholder="Наприклад: 3" step="any">
-                </div>
-                <div class="form-group">
-                    <label for="cathetusB">Введіть катет B (см):</label><br>
-                    <input type="number" id="cathetusB" placeholder="Наприклад: 4" step="any">
-                </div>
-                <button type="button" class="btn btn-js" onclick="calculateTriangle()">Обчислити (JS)</button>
-            </form>
-            <div class="result-box" id="triangleResult">Результат з'явиться тут...</div>
-        </fieldset>
-
-        <fieldset>
-            <legend>Задача 2: Розрахунок вартості покупки зі знижкою (if / else)</legend>
-            <p><small>Умова: якщо сума від 1000 грн — знижка 5%, від 3000 грн — знижка 10%, від 5000 грн — 15%.</small></p>
-            <form onsubmit="return false;">
-                <div class="form-group">
-                    <label for="purchaseSum">Введіть суму покупки (грн):</label><br>
-                    <input type="number" id="purchaseSum" placeholder="Наприклад: 3500" min="0">
-                </div>
-                <button type="button" class="btn btn-js" onclick="calculateDiscount()">Розрахувати ціну зі знижкою</button>
-            </form>
-            <div class="result-box" id="discountResult">Результат з'явиться тут...</div>
-        </fieldset>
-
-        <fieldset>
-            <legend>Задача 3: Обчислення факторіалу та суми чисел від 1 до N (цикл for)</legend>
-            <form onsubmit="return false;">
-                <div class="form-group">
-                    <label for="numberN">Введіть ціле число N (від 1 до 20):</label><br>
-                    <input type="number" id="numberN" placeholder="Наприклад: 5" min="1" max="20">
-                </div>
-                <button type="button" class="btn btn-js" onclick="calculateLoopTask()">Виконати цикл</button>
-            </form>
-            <div class="result-box" id="loopResult">Результат з'явиться тут...</div>
-        </fieldset>
+        <div class="badge-box">
+            <span class="pulse-badge" id="pulseItem">Активний статус</span>
+            <span>Приклад безперервної пульсації через <code>@keyframes</code> та <code>box-shadow</code>.</span>
+        </div>
     </section>
 
     <footer style="text-align: center; color: #666;">
@@ -264,73 +199,20 @@
     </footer>
 
     <script>
-       
-        function calculateTriangle() {
-            
-            let a = parseFloat(document.getElementById("cathetusA").value);
-            let b = parseFloat(document.getElementById("cathetusB").value);
-            let resultDiv = document.getElementById("triangleResult");
+        let isFast = false;
 
-        
-            if (isNaN(a) || isNaN(b) || a <= 0 || b <= 0) {
-                resultDiv.innerHTML = "<span style='color: red;'>Помилка! Введіть коректні додатні числа для обох катетів.</span>";
-                return;
-            }
-
-            let area = (a * b) / 2;
-            let hypotenuse = Math.sqrt(Math.pow(a, 2) + Math.pow(b, 2));
-
-            resultDiv.innerHTML = "Площа трикутника (S) = <strong>" + area.toFixed(2) + " см²</strong><br>" +
-                                  "Гіпотенуза (c) = <strong>" + hypotenuse.toFixed(2) + " см</strong>";
+        function toggleAnimation() {
+            let block = document.getElementById("animatedBlock");
+            let pulse = document.getElementById("pulseItem");
+            block.classList.toggle("paused");
+            pulse.classList.toggle("paused");
         }
 
-        function calculateDiscount() {
-            let sum = parseFloat(document.getElementById("purchaseSum").value);
-            let resultDiv = document.getElementById("discountResult");
-
-            if (isNaN(sum) || sum < 0) {
-                resultDiv.innerHTML = "<span style='color: red;'>Будь ласка, введіть правильну суму покупки.</span>";
-                return;
-            }
-
-            let discountPercent = 0;
-
-            if (sum >= 5000) {
-                discountPercent = 15;
-            } else if (sum >= 3000) {
-                discountPercent = 10;
-            } else if (sum >= 1000) {
-                discountPercent = 5;
-            } else {
-                discountPercent = 0;
-            }
-
-            let discountAmount = (sum * discountPercent) / 100;
-            let finalPrice = sum - discountAmount;
-
-            resultDiv.innerHTML = "Ваша знижка: <strong>" + discountPercent + "%</strong> (" + discountAmount.toFixed(2) + " грн)<br>" +
-                                  "До сплати: <strong>" + finalPrice.toFixed(2) + " грн</strong>";
-        }
-
-        function calculateLoopTask() {
-            let n = parseInt(document.getElementById("numberN").value);
-            let resultDiv = document.getElementById("loopResult");
-
-            if (isNaN(n) || n < 1 || n > 20) {
-                resultDiv.innerHTML = "<span style='color: red;'>Введіть ціле число в межах від 1 до 20!</span>";
-                return;
-            }
-
-            let sum = 0;
-            let factorial = 1;
-
-            for (let i = 1; i <= n; i++) {
-                sum += i;
-                factorial *= i;
-            }
-
-            resultDiv.innerHTML = "Сума чисел від 1 до " + n + " = <strong>" + sum + "</strong><br>" +
-                                  "Факторіал (" + n + "!) = <strong>" + factorial + "</strong>";
+        function changeSpeed() {
+            let block = document.getElementById("animatedBlock");
+            isFast = !isFast;
+           
+            block.style.animationDuration = isFast ? "1.5s" : "4s";
         }
     </script>
 
