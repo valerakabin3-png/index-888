@@ -3,15 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Практична робота — Гіперпосилання та кнопки</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    
+    <title>Практична робота — HTML-форми та обробка даних у JS</title>
     <style>
-       
-        html {
-            scroll-behavior: smooth;
-        }
-
         body {
             font-family: Arial, sans-serif;
             line-height: 1.6;
@@ -30,170 +23,314 @@
             box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         }
 
-   
-        .my-custom-btn {
-            display: inline-block;
-            background-color: #28a745;
-            color: white;
-            padding: 12px 24px;
-            text-decoration: none;
-            font-weight: bold;
-            border-radius: 5px;
-            border: 2px solid #1e7e34;
-            transition: background-color 0.3s, transform 0.2s;
-            cursor: pointer;
+        h1, h2 {
+            color: #2c3e50;
         }
 
-        .my-custom-btn:hover {
-            background-color: #218838;
-            color: white;
-            transform: scale(1.05);
-        }
-
-        .generated-btn {
-            box-shadow: inset 0px 1px 0px 0px #97c4fe;
-            background: linear-gradient(to bottom, #3d94f6 5%, #1e62d0 100%);
-            background-color: #3d94f6;
+        fieldset {
+            border: 1px solid #ccc;
             border-radius: 6px;
-            border: 1px solid #337fed;
+            padding: 15px;
+            margin-bottom: 15px;
+        }
+
+        legend {
+            font-weight: bold;
+            color: #0d6efd;
+            padding: 0 8px;
+        }
+
+        .form-group {
+            margin-bottom: 12px;
+        }
+
+        label {
             display: inline-block;
+            margin-bottom: 4px;
+            font-weight: bold;
+        }
+
+        input[type="text"],
+        input[type="password"],
+        input[type="email"],
+        input[type="number"],
+        input[type="date"],
+        select,
+        textarea {
+            width: 100%;
+            max-width: 400px;
+            padding: 8px;
+            border: 1px solid #bbb;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        .btn {
+            background-color: #0d6efd;
+            color: white;
+            padding: 10px 18px;
+            border: none;
+            border-radius: 5px;
             cursor: pointer;
-            color: #ffffff;
-            font-family: Arial;
             font-size: 15px;
             font-weight: bold;
-            padding: 10px 24px;
-            text-decoration: none;
-            text-shadow: 0px 1px 0px #1570cd;
-        }
-        .generated-btn:hover {
-            background: linear-gradient(to bottom, #1e62d0 5%, #3d94f6 100%);
-            background-color: #1e62d0;
-            color: #ffffff;
+            margin-right: 10px;
         }
 
-        .nav-menu {
-            display: flex;
-            gap: 10px;
-            flex-wrap: wrap;
+        .btn:hover {
+            background-color: #0b5ed7;
         }
 
-        .js-box {
+        .btn-reset {
+            background-color: #6c757d;
+        }
+
+        .btn-reset:hover {
+            background-color: #5a6268;
+        }
+
+        .btn-js {
+            background-color: #198754;
+        }
+
+        .btn-js:hover {
+            background-color: #157347;
+        }
+
+        .result-box {
             background-color: #e9ecef;
-            padding: 15px;
-            border-left: 4px solid #0d6efd;
+            border-left: 4px solid #198754;
+            padding: 12px 15px;
             margin-top: 15px;
+            border-radius: 4px;
+            font-size: 16px;
         }
     </style>
 </head>
 <body>
 
-    
-    <header id="top">
-        <h1>Основи веб-розробки: Навігація та кнопки</h1>
+    <header>
+        <h1>Практична робота: Створення HTML-форм та передача даних у JS</h1>
         <p><strong>Виконав:</strong> студент групи ІПЗ-24-1</p>
-        
-        <hr>
-        <h3>Навігація по поточному документу (Якірні посилання):</h3>
-        <div class="nav-menu">
-         
-            <a href="#section1" class="my-custom-btn">Розділ 1: Вступ</a>
-            <a href="#section2" class="generated-btn">Розділ 2: Історія HTML</a>
-            <a href="#section3" class="btn btn-warning">Розділ 3: Попередні роботи</a>
-            <a href="#js-section" class="btn btn-info">До JavaScript функції</a>
-        </div>
+        <p><a href="index.html">← Повернутися до попередньої роботи (Посилання та кнопки)</a></p>
     </header>
 
-    
-    <section id="section1">
-        <h2>Розділ 1. Вступ до гіпертексту</h2>
-        <p>Гіпертекст — це текст, який містить посилання на інші тексти або фрагменти всередині самого себе. Саме завдяки гіперпосиланням звичайні текстові документи перетворилися на Всесвітню павутину (World Wide Web), якою ми користуємося щодня. Основним тегом для створення посилань у мові HTML є тег <code><a></code> з обов'язковим атрибутом <code>href</code>.</p>
-        <p>Коли документ має великий обсяг тексту, користувачеві незручно постійно крутити коліщатко миші вгору та вниз. Для вирішення цієї проблеми використовують так звані «якірні» посилання. Вони дозволяють миттєво перестрибнути до потрібного абзацу або заголовка. Для цього елементу, на який ми хочемо перейти, задається унікальний атрибут <code>id</code>, а в посиланні вказується його назва зі знаком решітки <code>#</code> попереду.</p>
-        <p>Крім звичайного підкресленого синього тексту, сучасні сайти оформлюють посилання у вигляді кнопок. Це робить інтерфейс більш інтуїтивним та зручним для натискання як мишкою на комп'ютері, так і пальцем на екрані смартфона. Створити таку кнопку можна власноруч за допомогою CSS, згенерувати на спеціальних онлайн-сервісах або взяти готову з CSS-фреймворків.</p>
-        
-        <a href="#top">↑ Повернутися на початок сторінки</a>
+
+    <section>
+        <h2>1. Форма реєстрації студента (текстові поля та списки)</h2>
+        <form action="#" method="post" onsubmit="alert('Дані форми відправлено!'); return false;">
+            <fieldset>
+                <legend>Особисті дані</legend>
+                
+                <div class="form-group">
+                    <label for="username">Прізвище та ім'я:</label><br>
+                    <input type="text" id="username" name="username" placeholder="Введіть ПІБ" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="useremail">Електронна пошта:</label><br>
+                    <input type="email" id="useremail" name="useremail" placeholder="student@ukraine.edu.ua" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="userpass">Пароль:</label><br>
+                    <input type="password" id="userpass" name="userpass" placeholder="Мінімум 6 символів" minlength="6" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="birthdate">Дата народження:</label><br>
+                    <input type="date" id="birthdate" name="birthdate">
+                </div>
+
+                <div class="form-group">
+                    <label for="group">Оберіть групу:</label><br>
+                    <select id="group" name="group">
+                        <option value="ipz-24-1" selected>ІПЗ-24-1</option>
+                        <option value="ipz-24-2">ІПЗ-24-2</option>
+                        <option value="kn-24-1">КН-24-1</option>
+                    </select>
+                </div>
+            </fieldset>
+
+            <button type="submit" class="btn">Зареєструватися</button>
+            <button type="reset" class="btn btn-reset">Очистити форму</button>
+        </form>
     </section>
 
-    
-    <section id="section2">
-        <h2>Розділ 2. Коротка історія розвитку HTML та CSS</h2>
-        <p>Мова розмітки гіпертексту HTML була створена британським вченим Тімом Бернерсом-Лі на початку 1990-х років у стінах Європейської організації з ядерних досліджень (CERN). Спочатку вона налічувала менше двадцяти тегів і призначалася виключно для обміну науковою документацією між фізиками з різних університетів світу.</p>
-        <p>Перші веб-сторінки виглядали дуже просто: білий або сірий фон, чорний текст шрифтом Times New Roman і сині підкреслені посилання. Жодних анімацій, градієнтів чи красивих кнопок тоді не існувало. Усі спроби прикрасити сторінку робилися прямо в HTML за допомогою тегів на кшталт <code><font></code> або таблиць, що робило код громіздким і важким для підтримки.</p>
-        <p>Ситуація кардинально змінилася з появою каскадних таблиць стилів — CSS (Cascading Style Sheets). Це дозволило відокремити структуру документа (HTML) від його зовнішнього вигляду (CSS). Тепер розробники отримали повний контроль над кольорами, відступами, тінями, заокругленням кутів та поведінкою елементів при наведенні курсора (псевдоклас <code>:hover</code>). Сьогодні стандарт HTML5 у поєднанні з CSS3 дозволяє створювати повноцінні веб-додатки, які нічим не поступаються звичайним програмам на ПК.</p>
-        <p>Для прискорення роботи програмісти часто використовують генератори коду (наприклад, CSS Button Generator) або підключають готові бібліотеки стилів, такі як Bootstrap чи Tailwind CSS, де вже прописані класи для десятків варіантів кнопок, форм та меню.</p>
 
-        <a href="#top">↑ Повернутися на початок сторінки</a>
+    <section>
+        <h2>2. Форма опитування (перемикачі, прапорці, повзунки)</h2>
+        <form action="#" method="get" onsubmit="alert('Дякуємо за участь в опитуванні!'); return false;">
+            <fieldset>
+                <legend>Ваші вподобання у програмуванні</legend>
+
+                <div class="form-group">
+                    <p><strong>Оберіть основний напрямок (radio — тільки один варіант):</strong></p>
+                    <input type="radio" id="frontend" name="direction" value="frontend" checked>
+                    <label for="frontend" style="font-weight: normal;">Frontend (HTML, CSS, JS)</label><br>
+                    
+                    <input type="radio" id="backend" name="direction" value="backend">
+                    <label for="backend" style="font-weight: normal;">Backend (Python, C#, Node.js)</label><br>
+                    
+                    <input type="radio" id="gamedev" name="direction" value="gamedev">
+                    <label for="gamedev" style="font-weight: normal;">GameDev (Unity, Unreal Engine)</label>
+                </div>
+
+                <div class="form-group">
+                    <p><strong>Які мови ви вже вивчали (checkbox — кілька варіантів):</strong></p>
+                    <input type="checkbox" id="lang_py" name="langs" value="Python" checked>
+                    <label for="lang_py" style="font-weight: normal;">Python</label><br>
+
+                    <input type="checkbox" id="lang_js" name="langs" value="JavaScript" checked>
+                    <label for="lang_js" style="font-weight: normal;">JavaScript</label><br>
+
+                    <input type="checkbox" id="lang_cpp" name="langs" value="C++">
+                    <label for="lang_cpp" style="font-weight: normal;">C / C++</label>
+                </div>
+
+                <div class="form-group">
+                    <label for="skill_level">Оцініть свій рівень знань (від 1 до 10):</label><br>
+                    <input type="range" id="skill_level" name="skill_level" min="1" max="10" value="5" oninput="this.nextElementSibling.value = this.value">
+                    <output>5</output>
+                </div>
+
+                <div class="form-group">
+                    <label for="fav_color">Улюблений колір теми редактора коду:</label>
+                    <input type="color" id="fav_color" name="fav_color" value="#1e1e1e">
+                </div>
+
+                <div class="form-group">
+                    <label for="avatar">Завантажити скріншот коду (file):</label><br>
+                    <input type="file" id="avatar" name="avatar">
+                </div>
+
+                <div class="form-group">
+                    <label for="comments">Додатковий коментар (textarea):</label><br>
+                    <textarea id="comments" name="comments" rows="3" placeholder="Напишіть ваші враження від лекції..."></textarea>
+                </div>
+            </fieldset>
+
+            <button type="submit" class="btn">Надіслати відповіді</button>
+        </form>
     </section>
 
-   
-    <section id="section3">
-        <h2>Розділ 3. Кнопки-посилання на наші попередні роботи</h2>
-        <p>Нижче наведено перехід до раніше виконаних практичних робіт (посилання на інші локальні HTML-документи):</p>
-        
-        <ul>
-            <li style="margin-bottom: 15px;">
-                <strong>1. Саморобна кнопка :</strong><br>
-                <a href="lab1.html" target="_blank" class="my-custom-btn">Відкрити Лабораторну роботу №1 (Форматування тексту)</a>
-            </li>
-            
-            <li style="margin-bottom: 15px;">
-                <strong>2. Кнопка з онлайн-генератора кнопок :</strong><br>
-                <a href="lab2.html" target="_blank" class="generated-btn">Відкрити Лабораторну роботу №2 (Списки та таблиці)</a>
-            </li>
-            
-            <li style="margin-bottom: 15px;">
-                <strong>3. Готова кнопка з бібліотеки :</strong><br>
-                <a href="lab3.html" target="_blank" class="btn btn-primary btn-lg">Відкрити Лабораторну роботу №3 (Робота з графікою)</a>
-            </li>
-        </ul>
+    <section>
+        <h2>3. Внесення даних у форму для роботи функцій JavaScript</h2>
+        <p>Реалізація задач з курсу <em>«Основи програмування на JavaScript»</em> із введенням даних через HTML-форму замість застарілого <code>prompt()</code>.</p>
+        <fieldset>
+            <legend>Задача 1: Площа та гіпотенуза прямокутного трикутника</legend>
+            <form onsubmit="return false;">
+                <div class="form-group">
+                    <label for="cathetusA">Введіть катет A (см):</label><br>
+                    <input type="number" id="cathetusA" placeholder="Наприклад: 3" step="any">
+                </div>
+                <div class="form-group">
+                    <label for="cathetusB">Введіть катет B (см):</label><br>
+                    <input type="number" id="cathetusB" placeholder="Наприклад: 4" step="any">
+                </div>
+                <button type="button" class="btn btn-js" onclick="calculateTriangle()">Обчислити (JS)</button>
+            </form>
+            <div class="result-box" id="triangleResult">Результат з'явиться тут...</div>
+        </fieldset>
 
-        <a href="#top">↑ Повернутися на початок сторінки</a>
-    </section>
+        <fieldset>
+            <legend>Задача 2: Розрахунок вартості покупки зі знижкою (if / else)</legend>
+            <p><small>Умова: якщо сума від 1000 грн — знижка 5%, від 3000 грн — знижка 10%, від 5000 грн — 15%.</small></p>
+            <form onsubmit="return false;">
+                <div class="form-group">
+                    <label for="purchaseSum">Введіть суму покупки (грн):</label><br>
+                    <input type="number" id="purchaseSum" placeholder="Наприклад: 3500" min="0">
+                </div>
+                <button type="button" class="btn btn-js" onclick="calculateDiscount()">Розрахувати ціну зі знижкою</button>
+            </form>
+            <div class="result-box" id="discountResult">Результат з'явиться тут...</div>
+        </fieldset>
 
-   
-    <section id="js-section">
-        <h2>Розділ 4. Інтерактивна кнопка на JavaScript</h2>
-        <p>Натисніть на кнопку нижче, щоб запустити простий скрипт, який перевіряє поточний час, рахує кількість натискань і змінює текст на сторінці:</p>
-
-        
-        <button onclick="studentFunction()" class="btn btn-danger btn-lg">Запустити JS-функцію!</button>
-
-        <div class="js-box" id="result-area">
-            Тут з'явиться результат роботи JavaScript...
-        </div>
-
-        <br>
-        <a href="#top">↑ Повернутися на початок сторінки</a>
+        <fieldset>
+            <legend>Задача 3: Обчислення факторіалу та суми чисел від 1 до N (цикл for)</legend>
+            <form onsubmit="return false;">
+                <div class="form-group">
+                    <label for="numberN">Введіть ціле число N (від 1 до 20):</label><br>
+                    <input type="number" id="numberN" placeholder="Наприклад: 5" min="1" max="20">
+                </div>
+                <button type="button" class="btn btn-js" onclick="calculateLoopTask()">Виконати цикл</button>
+            </form>
+            <div class="result-box" id="loopResult">Результат з'явиться тут...</div>
+        </fieldset>
     </section>
 
     <footer style="text-align: center; color: #666;">
-        <p>
+        <p>© 2026 | Студентська робота | Група ІПЗ-24-1</p>
     </footer>
 
     <script>
+       
+        function calculateTriangle() {
+            
+            let a = parseFloat(document.getElementById("cathetusA").value);
+            let b = parseFloat(document.getElementById("cathetusB").value);
+            let resultDiv = document.getElementById("triangleResult");
+
         
-        let clickCount = 0;
+            if (isNaN(a) || isNaN(b) || a <= 0 || b <= 0) {
+                resultDiv.innerHTML = "<span style='color: red;'>Помилка! Введіть коректні додатні числа для обох катетів.</span>";
+                return;
+            }
 
-        function studentFunction() {
-        
-            clickCount++;
+            let area = (a * b) / 2;
+            let hypotenuse = Math.sqrt(Math.pow(a, 2) + Math.pow(b, 2));
 
-            
-            let now = new Date();
-            let currentTime = now.toLocaleTimeString();
+            resultDiv.innerHTML = "Площа трикутника (S) = <strong>" + area.toFixed(2) + " см²</strong><br>" +
+                                  "Гіпотенуза (c) = <strong>" + hypotenuse.toFixed(2) + " см</strong>";
+        }
 
-           
-            alert("Привіт! Функція спрацювала! Це натискання №" + clickCount);
+        function calculateDiscount() {
+            let sum = parseFloat(document.getElementById("purchaseSum").value);
+            let resultDiv = document.getElementById("discountResult");
 
-           
-            let outputBox = document.getElementById("result-area");
-            outputBox.innerHTML = "<strong>Успіх!</strong> Ви натиснули на кнопку <b>" + clickCount + "</b> раз(ів).<br>" +
-                                  "Час запуску скрипта: <b>" + currentTime + "</b>.<br>" +
-                                  "Студент групи ІПЗ-24-1 успішно виконав завдання!";
-            
-            
-            outputBox.style.borderLeftColor = "#28a745";
-            outputBox.style.backgroundColor = "#d4edda";
+            if (isNaN(sum) || sum < 0) {
+                resultDiv.innerHTML = "<span style='color: red;'>Будь ласка, введіть правильну суму покупки.</span>";
+                return;
+            }
+
+            let discountPercent = 0;
+
+            if (sum >= 5000) {
+                discountPercent = 15;
+            } else if (sum >= 3000) {
+                discountPercent = 10;
+            } else if (sum >= 1000) {
+                discountPercent = 5;
+            } else {
+                discountPercent = 0;
+            }
+
+            let discountAmount = (sum * discountPercent) / 100;
+            let finalPrice = sum - discountAmount;
+
+            resultDiv.innerHTML = "Ваша знижка: <strong>" + discountPercent + "%</strong> (" + discountAmount.toFixed(2) + " грн)<br>" +
+                                  "До сплати: <strong>" + finalPrice.toFixed(2) + " грн</strong>";
+        }
+
+        function calculateLoopTask() {
+            let n = parseInt(document.getElementById("numberN").value);
+            let resultDiv = document.getElementById("loopResult");
+
+            if (isNaN(n) || n < 1 || n > 20) {
+                resultDiv.innerHTML = "<span style='color: red;'>Введіть ціле число в межах від 1 до 20!</span>";
+                return;
+            }
+
+            let sum = 0;
+            let factorial = 1;
+
+            for (let i = 1; i <= n; i++) {
+                sum += i;
+                factorial *= i;
+            }
+
+            resultDiv.innerHTML = "Сума чисел від 1 до " + n + " = <strong>" + sum + "</strong><br>" +
+                                  "Факторіал (" + n + "!) = <strong>" + factorial + "</strong>";
         }
     </script>
 
